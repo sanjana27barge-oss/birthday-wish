@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy Birthday!</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Poppins',sans-serif;
+}
+
+body{
+background:linear-gradient(135deg,#ff758c,#ff7eb3,#8f94fb);
+min-height:100vh;
+overflow-x:hidden;
+color:white;
+}
+
+.hero{
+height:100vh;
+display:flex;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+text-align:center;
+padding:20px;
+position:relative;
+}
+
+.glass{
+background:rgba(255,255,255,0.15);
+backdrop-filter:blur(10px);
+padding:30px;
+border-radius:25px;
+box-shadow:0 8px 32px rgba(0,0,0,.2);
+max-width:800px;
+}
+
+h1{
+font-size:4rem;
+margin-bottom:10px;
+animation:float 3s ease-in-out infinite;
+}
+
+.subtitle{
+font-size:1.3rem;
+margin-bottom:20px;
+}
+
+.countdown{
+display:flex;
+gap:15px;
+justify-content:center;
+flex-wrap:wrap;
+margin-top:20px;
+}
+
+.time-box{
+background:rgba(255,255,255,0.2);
+padding:15px;
+border-radius:15px;
+min-width:90px;
+}
+
+.time-box h2{
+font-size:2rem;
+}
+
+.gallery{
+padding:80px 20px;
+text-align:center;
+}
+
+.gallery-grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+gap:20px;
+max-width:1100px;
+margin:auto;
+}
+
+.gallery img{
+width:100%;
+height:280px;
+object-fit:cover;
+border-radius:20px;
+transition:.4s;
+}
+
+.gallery img:hover{
+transform:scale(1.05);
+}
+
+.music-btn{
+position:fixed;
+top:20px;
+right:20px;
+border:none;
+padding:15px;
+border-radius:50%;
+cursor:pointer;
+font-size:22px;
+z-index:999;
+}
+
+.gift-section{
+padding:100px 20px;
+text-align:center;
+}
+
+.gift-box{
+width:180px;
+height:180px;
+margin:auto;
+position:relative;
+cursor:pointer;
+transition:.5s;
+}
+
+.box{
+width:180px;
+height:130px;
+background:#ff4d6d;
+position:absolute;
+bottom:0;
+border-radius:0 0 20px 20px;
+}
+
+.lid{
+width:190px;
+height:40px;
+background:#ff1e56;
+position:absolute;
+top:20px;
+left:-5px;
+border-radius:15px;
+transition:.8s;
+transform-origin:left center;
+}
+
+.ribbon-v{
+position:absolute;
+width:25px;
+height:180px;
+background:white;
+left:50%;
+transform:translateX(-50%);
+}
+
+.ribbon-h{
+position:absolute;
+width:190px;
+height:25px;
+background:white;
+top:70px;
+left:-5px;
+}
+
+.open .lid{
+transform:rotate(-130deg);
+}
+
+.surprise{
+margin-top:40px;
+font-size:1.5rem;
+display:none;
+animation:fadeIn 2s;
+}
+
+footer{
+padding:40px;
+text-align:center;
+}
+
+.confetti{
+position:fixed;
+width:10px;
+height:10px;
+top:-10px;
+animation:fall linear forwards;
+z-index:9999;
+}
+
+@keyframes fall{
+to{
+transform:translateY(110vh) rotate(720deg);
+}
+}
+
+@keyframes float{
+50%{
+transform:translateY(-12px);
+}
+}
+
+@keyframes fadeIn{
+from{
+opacity:0;
+transform:translateY(30px);
+}
+to{
+opacity:1;
+transform:translateY(0);
+}
+}
+
+</style>
+</head>
+<body>
+
+<button class="music-btn" onclick="toggleMusic()">🎵</button>
+
+<audio id="bgMusic" loop>
+<source src="YOUR-MUSIC-LINK.mp3" type="audio/mpeg">
+</audio>
+
+<section class="hero">
+
+<div class="glass">
+<h1>🎂 Happy Birthday 🎉</h1>
+
+<p class="subtitle">
+Dear <strong>NIDUUU</strong>,
+Today is all about celebrating you!
+</p>
+
+<div class="countdown">
+<div class="time-box">
+<h2 id="days">0</h2>
+<p>Days</p>
+</div>
+
+<div class="time-box">
+<h2 id="hours">0</h2>
+<p>Hours</p>
+</div>
+
+<div class="time-box">
+<h2 id="minutes">0</h2>
+<p>Minutes</p>
+</div>
+
+<div class="time-box">
+<h2 id="seconds">0</h2>
+<p>Seconds</p>
+</div>
+</div>
+
+</div>
+
+</section>
+
+<section class="gallery">
+
+<h2 style="margin-bottom:30px;font-size:3rem;">
+📸 Our Memories
+</h2>
+
+<div class="gallery-grid">
+
+<img src="PHOTO_URL_1">
+
+<img src="PHOTO_URL_2">
+
+<img src="PHOTO_URL_3">
+
+<img src="PHOTO_URL_4">
+
+</div>
+
+</section>
+
+<section class="gift-section">
+
+<h2 style="font-size:3rem;margin-bottom:30px;">
+🎁 Open Your Surprise
+</h2>
+
+<div class="gift-box" id="giftBox">
+
+<div class="lid"></div>
+
+<div class="box"></div>
+
+<div class="ribbon-v"></div>
+
+<div class="ribbon-h"></div>
+
+</div>
+
+<div class="surprise" id="surprise">
+
+✨ Happy Birthday! ✨
+
+<br><br>
+From school memories to late-night talks,
+you've always been there for me.
+  
+You are one of the most amazing people in my life.
+Thank you for all the laughter, memories, and support.
+
+May this year bring happiness, success, love,
+and everything you've been wishing for.
+Thank you for being the best friend anyone could ask for.
+
+❤️ Forever grateful for our friendship ❤️
+
+</div>
+
+</section>
+
+<footer>
+
+Made with ❤️ for NIDUU
+
+</footer>
+
+<script>
+
+/* CONFETTI */
+
+function createConfetti(){
+
+const colors=[
+'#ff0a54',
+'#ff477e',
+'#ff7096',
+'#ff85a1',
+'#fbb1bd',
+'#a0c4ff'
+];
+
+for(let i=0;i<150;i++){
+
+const conf=document.createElement('div');
+
+conf.classList.add('confetti');
+
+conf.style.left=Math.random()*100+'vw';
+
+conf.style.background=
+colors[Math.floor(Math.random()*colors.length)];
+
+conf.style.opacity=Math.random();
+
+conf.style.width=
+Math.random()*8+5+'px';
+
+conf.style.height=
+Math.random()*8+5+'px';
+
+conf.style.animationDuration=
+Math.random()*3+2+'s';
+
+document.body.appendChild(conf);
+
+setTimeout(()=>{
+conf.remove();
+},6000);
+}
+}
+
+createConfetti();
+
+setInterval(createConfetti,8000);
+
+
+/* MUSIC */
+
+const music=document.getElementById('bgMusic');
+
+function toggleMusic(){
+
+if(music.paused){
+music.play();
+}
+else{
+music.pause();
+}
+
+}
+
+
+/* GIFT BOX */
+
+const gift=document.getElementById('giftBox');
+
+gift.addEventListener('click',()=>{
+
+gift.classList.add('open');
+
+document.getElementById('surprise').style.display='block';
+
+createConfetti();
+
+});
+
+
+/* COUNTDOWN */
+
+const birthday=new Date("2026-06-10T00:00:00");
+
+function updateCountdown(){
+
+const now=new Date();
+
+const diff=birthday-now;
+
+if(diff<=0)return;
+
+const days=Math.floor(diff/(1000*60*60*24));
+
+const hours=Math.floor(
+(diff%(1000*60*60*24))/(1000*60*60)
+);
+
+const minutes=Math.floor(
+(diff%(1000*60*60))/(1000*60)
+);
+
+const seconds=Math.floor(
+(diff%(1000*60))/1000
+);
+
+document.getElementById('days').innerText=days;
+document.getElementById('hours').innerText=hours;
+document.getElementById('minutes').innerText=minutes;
+document.getElementById('seconds').innerText=seconds;
+
+}
+
+updateCountdown();
+
+setInterval(updateCountdown,1000);
+
+</script>
+
+</body>
+</html>
